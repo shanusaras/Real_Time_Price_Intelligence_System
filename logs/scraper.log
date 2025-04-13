@@ -1,3 +1,0 @@
-2025-04-11 16:25:45,750 - ERROR - \u274c Error occurred during scraping: Cannot save file into a non-existent directory: 'data'
-2025-04-11 16:28:45,414 - ERROR - \u274c Error occurred during scraping: Cannot save file into a non-existent directory: 'data'
-2025-04-11 16:29:12,683 - INFO - \u2705 Scraped 24 rows and saved to data/flipkart_products.csv

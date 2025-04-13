@@ -1,30 +1,38 @@
+
 from bs4 import BeautifulSoup
 import yaml
+from modules.utils import extract_with_fallback
 
-# Load YAML selector config
+
+
+# Load the CSS selectors from config file (YAML format)
 def load_selectors():
     with open("flipkart_scraper/config/selectors.yaml", "r") as f:
         return yaml.safe_load(f)
+    
 
-# Try multiple fallback CSS selectors
-def extract_with_fallback(soup, selector_list):
-    for selector in selector_list:
-        elements = soup.select(selector)
-        if elements:
-            return [el.get_text(strip=True) for el in elements]
-    return []
+# Parse relevant product info from raw HTML using selectors
+# Returns list of dicts with product info
 
-# Full parser function
-def parse_data(html):
+def parse_data(html, category="unknown"):
     soup = BeautifulSoup(html, "html.parser")
     selectors = load_selectors()
 
+    # Extract fields using fallback logic (tries multiple selectors)
     titles = extract_with_fallback(soup, selectors["product_title"])
     prices = extract_with_fallback(soup, selectors["product_price"])
+    ratings = extract_with_fallback(soup, selectors["product_rating"])
+    reviews = extract_with_fallback(soup, selectors["num_reviews"])
+    discounts = extract_with_fallback(soup, selectors["discount"])
 
-    # Match up titles and prices (truncate to shorter list if mismatch)
-    min_len = min(len(titles), len(prices))
-    titles = titles[:min_len]
-    prices = prices[:min_len]
+    # Use minimum length to align records and avoid index errors
+    min_len = min(len(titles), len(prices), len(ratings), len(reviews), len(discounts))
 
-    return [{"Product Name": t, "Price": p} for t, p in zip(titles, prices)]
+    return [{
+        "Product Name": titles[i],
+        "Price": prices[i],
+        "Rating": ratings[i],
+        "Reviews": reviews[i],
+        "Discount": discounts[i],
+        "Category": category
+    } for i in range(min_len)]
