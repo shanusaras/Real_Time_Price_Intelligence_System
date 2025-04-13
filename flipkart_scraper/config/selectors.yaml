@@ -1,7 +1,19 @@
+# This YAML stores fallback selectors per field
+# Supports multiple layouts Flipkart uses across categories
+
 product_title:
-  - "div.KzDlHZ"
-  - "div._4rR01T"
+  - "div._4rR01T"  # Common for electronics
+  - "a.s1Q9rs"     # Common for fashion/accessories
 
 product_price:
-  - "div.Nx9bqj"
   - "div._30jeq3._1_WHN1"
+  - "div._30jeq3"
+
+product_rating:
+  - "div._3LWZlK"
+
+num_reviews:
+  - "span._2_R_DZ"
+
+discount:
+  - "div._3Ay6Sb span"
