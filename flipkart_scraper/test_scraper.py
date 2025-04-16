@@ -34,7 +34,7 @@ def test_single_category():
         min_price = 30000
         max_price = 100000
         num_pages = 1
-        
+
         # Get HTML content
         html = get_html(
             search_term=search_term,
@@ -42,8 +42,9 @@ def test_single_category():
             min_price=min_price,
             max_price=max_price
         )
-        
+
         if html:
+            print("\n===== HTML SNIPPET (first 2000 chars) =====\n" + html[:2000] + "\n==========================================\n")
             # Parse the HTML content
             products = parse_data(html, category="laptops")
             if products:
@@ -54,7 +55,7 @@ def test_single_category():
                 logging.error("❌ No products found in the HTML content")
         else:
             logging.error("❌ Failed to get HTML content")
-            
+
     except Exception as e:
         logging.error(f"❌ Test failed: {str(e)}")
 
