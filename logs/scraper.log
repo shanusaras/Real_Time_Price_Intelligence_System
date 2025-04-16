@@ -1,0 +1,2 @@
+2025-04-16 19:55:09,834 - INFO - Starting scrape for category: laptops
+2025-04-16 19:55:09,835 - ERROR - Error scraping laptops: name 'options' is not defined

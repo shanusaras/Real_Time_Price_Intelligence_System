@@ -4,16 +4,47 @@
 product_title:
   - "div._4rR01T"  # Common for electronics
   - "a.s1Q9rs"     # Common for fashion/accessories
+  - "div._2B099V a"  # Alternative layout
 
 product_price:
   - "div._30jeq3._1_WHN1"
   - "div._30jeq3"
+  - "div._3I9_wc"
+
+original_price:
+  - "div._3I9_wc._27UcVY"  # Strikethrough price
+  - "div._3I9_wc"          # Alternative layout
+
+discount_percentage:
+  - "div._3Ay6Sb._31Dcoz span"  # Percentage off
+  - "div._3Ay6Sb span"          # Alternative layout
+
+product_brand:
+  - "div._2WkVRV"    # Common brand selector
+  - "span._2WkVRV"   # Alternative brand selector
+  - "div._2B099V a"  # Sometimes brand is in title
+
+product_description:
+  - "div._1mXcCf p"  # Common description selector
+  - "div._1mXcCf"    # Alternative description layout
+  - "div._2o-xpa"    # Another description layout
+
+product_features:
+  - "div._2418kt"      # Features list
+  - "div._3zQGKx"      # Specifications
+  - "div._3nkT-2 li"   # Bullet points
 
 product_rating:
-  - "div._3LWZlK"
+  - "div._3LWZlK"    # Main rating
+  - "div.gUuXy-"     # Alternative layout
+  - "div._2d4LTz"    # Another layout
 
-num_reviews:
-  - "span._2_R_DZ"
+review_count:
+  - "span._2_R_DZ span"  # Review count in text
+  - "span._13vcmD"       # Alternative layout
+  - "span._34hpFu"       # Another layout
 
-discount:
-  - "div._3Ay6Sb span"
+product_url:
+  - "a._1fQZEK"      # Electronics layout
+  - "a.s1Q9rs"       # Fashion layout
+  - "a._2rpwqI"      # Alternative layout
