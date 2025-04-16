@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: price_intelligence
+Version: 0.1
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: sqlalchemy
+Requires-Dist: mysqlclient
+Requires-Dist: pymongo
+Requires-Dist: pandas
+Requires-Dist: python-dotenv
+Requires-Dist: sqlalchemy-utils
+Dynamic: requires-dist

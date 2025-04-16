@@ -1,0 +1,31 @@
+# API and Web Framework
+fastapi==0.104.1
+uvicorn==0.24.0
+python-dotenv==1.0.0
+streamlit==1.28.1
+
+# Data Processing and Analysis
+pandas==2.0.3
+numpy==1.24.3
+scikit-learn==1.3.2
+prophet==1.1.4
+jupyter==1.0.0
+
+# Database
+mysqlclient==2.2.0
+sqlalchemy==2.0.23
+
+# API Clients
+requests==2.31.0
+
+# Visualization
+plotly==5.18.0
+
+# Testing
+pytest==7.4.3
+
+# Development
+black==23.10.1
+flake8==6.1.0
+pre-commit==3.5.0
+free-proxy>=1.1.1

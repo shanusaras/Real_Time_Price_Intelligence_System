@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: price_intelligence_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: smartie@123.
+      MYSQL_DATABASE: price_intelligence
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-psmartie@123."]
+      interval: "10s"
+      timeout: "5s"
+      retries: 5
+
+  jupyter:
+    build:
+      context: .
+      dockerfile: jupyter.Dockerfile
+    container_name: price_intelligence_jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/notebooks
+      - ./data:/data
+    depends_on:
+      - mysql
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    container_name: price_intelligence_api
+    ports:
+      - "8000:8000"
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=smartie@123.
+      - MYSQL_DB=price_intelligence
+    depends_on:
+      - mysql
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: dashboard.Dockerfile
+    container_name: price_intelligence_dashboard
+    ports:
+      - "8501:8501"
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=smartie@123.
+      - MYSQL_DB=price_intelligence
+    depends_on:
+      - mysql
+      - fastapi
+
+volumes:
+  mysql_data:
+  postgres_data:
+  mongodb_data:

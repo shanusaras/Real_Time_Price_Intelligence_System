@@ -1,0 +1,29 @@
+categories:
+  laptops:
+    search_term: laptop
+    min_price: 30000
+    max_price: 100000
+    brands:
+      - HP
+      - Dell
+      - Lenovo
+      - Acer
+      - Asus
+
+  smartphones:
+    search_term: "smartphone"
+    min_price: 5000
+    max_price: 150000
+    brands: ["Samsung", "Apple", "OnePlus", "Xiaomi", "Realme"]
+    
+  smartwatches:
+    search_term: "smartwatch"
+    min_price: 1000
+    max_price: 50000
+    brands: ["Apple", "Samsung", "Noise", "boAt", "Fire-Boltt"]
+
+scraping_config:
+  pages_per_category: 3
+  delay_between_pages: [3, 5]  # Random delay range in seconds
+  max_retries: 3
+  batch_size: 50  # Items per batch for database insertion
