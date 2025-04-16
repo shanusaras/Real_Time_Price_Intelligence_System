@@ -89,7 +89,7 @@ This is an educational project. While contributions are welcome, please ensure t
 ## 📝 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 - Built for educational purposes
 - Demonstrates modern software architecture
 - Showcases ethical data practices
