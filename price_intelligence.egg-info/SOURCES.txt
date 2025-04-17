@@ -1,7 +1,0 @@
-README.md
-setup.py
-price_intelligence.egg-info/PKG-INFO
-price_intelligence.egg-info/SOURCES.txt
-price_intelligence.egg-info/dependency_links.txt
-price_intelligence.egg-info/requires.txt
-price_intelligence.egg-info/top_level.txt

@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-sqlalchemy
-mysqlclient
-pymongo
-pandas
-python-dotenv
-sqlalchemy-utils
