@@ -1,0 +1,27 @@
+Error on page 149, attempt 1: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 149, attempt 2: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 150, attempt 1: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 150, attempt 2: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 150, attempt 3: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Failed to fetch page 150 after 3 attempts.
+Error on page 151, attempt 1: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 152, attempt 1: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 152, attempt 2: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 152, attempt 3: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Failed to fetch page 152 after 3 attempts.
+Error on page 153, attempt 1: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 153, attempt 2: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 153, attempt 3: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Failed to fetch page 153 after 3 attempts.
+Error on page 154, attempt 1: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 154, attempt 2: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 154, attempt 3: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Failed to fetch page 154 after 3 attempts.
+Error on page 155, attempt 1: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 156, attempt 1: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 156, attempt 2: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 156, attempt 3: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Failed to fetch page 156 after 3 attempts.
+Error on page 157, attempt 1: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 158, attempt 1: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)
+Error on page 158, attempt 2: HTTPSConnectionPool(host='world.openfoodfacts.org', port=443): Read timed out. (read timeout=15)

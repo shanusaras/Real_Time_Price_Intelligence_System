@@ -19,6 +19,62 @@ An educational demonstration project showcasing a modern data pipeline for price
 
 ## 🏗️ System Architecture
 
+## 📥 Data Collection Process
+
+### Overview
+- **Source:** Open Food Facts API (global, open dataset with millions of food/grocery products)
+- **Goal:** Collect a large, multi-category dataset (25,000+ products) for analytics and demonstration
+- **Approach:** Robust, scalable Python script with rate limiting, error handling, and progress logging
+
+### Design Decisions
+- **API-based collection:** Chosen for reliability, legality, and scalability
+- **Multi-category support:** Open Food Facts provides products from a wide range of categories (dairy, beverages, snacks, etc.)
+- **Rate limiting:** Script pauses between API requests to respect server load and demonstrate best practices
+- **Error handling:** Implements retries, logs errors, and skips problematic pages for uninterrupted collection
+- **Scalability:** Designed to handle tens of thousands of records efficiently
+
+### How It Works
+- Fetches products in batches (pages) using the Open Food Facts API
+- Retries failed requests up to 3 times with exponential backoff
+- Logs errors to `openfoodfacts_errors.log` for transparency
+- Saves the complete dataset to `openfoodfacts_products.json` for downstream ETL and analytics
+
+### Sample Output
+
+<details>
+<summary>Click to view sample product data</summary>
+
+```json
+[
+  {
+    "product_name": "Coca-Cola",
+    "brands": "Coca-Cola",
+    "categories": "Beverages, Carbonated drinks, Sodas",
+    "countries": "United States, France, Germany",
+    "quantity": "330 ml",
+    "stores": "Walmart, Carrefour",
+    "nutriments": {
+      "energy_100g": 180,
+      "sugars_100g": 10.6,
+      "fat_100g": 0
+      // ... more fields
+    }
+    // ... more fields
+  },
+  ...
+]
+```
+</details>
+
+### Reproducibility
+- **Script:** `data_collection/fetch_openfoodfacts_products.py`
+- **How to run:**
+  ```bash
+  python data_collection/fetch_openfoodfacts_products.py
+  ```
+- **Output location:** `data_collection/data/openfoodfacts_products.json`
+
+
 ### 1. Data Collection
 - Ethical web data collection with rate limiting
 - Response caching to minimize requests
@@ -89,7 +145,7 @@ This is an educational project. While contributions are welcome, please ensure t
 ## 📝 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-##  Acknowledgments
+## Acknowledgments
 - Built for educational purposes
 - Demonstrates modern software architecture
 - Showcases ethical data practices
