@@ -78,13 +78,16 @@ def fetch_openfoodfacts_products(
     return products[:max_records]
 
 if __name__ == "__main__":
-    # Configure logging to output to both console and file
+    # Determine the data directory relative to this script
+    data_dir = os.path.join(os.path.dirname(__file__), 'data')
+    os.makedirs(data_dir, exist_ok=True)
+    log_file_path = os.path.join(data_dir, 'scrape_all_products.log')
     log_format = '%(asctime)s [%(levelname)s] %(message)s'
     logging.basicConfig(
         level=logging.INFO,
         format=log_format,
         handlers=[
-            logging.FileHandler('data/openfoodfacts_collection.log', encoding='utf-8'),
+            logging.FileHandler(log_file_path, encoding='utf-8'),
             logging.StreamHandler()
         ]
     )
@@ -92,20 +95,16 @@ if __name__ == "__main__":
     # Ensure output directory exists
     os.makedirs('data', exist_ok=True)
     target_count = 25000
+
     # Fetch products from Open Food Facts
     products = fetch_openfoodfacts_products(max_records=target_count)
     logging.info(f"Fetched {len(products)} products from Open Food Facts.")
+    
     # Save the full dataset to a JSON file
-    with open('data/openfoodfacts_products.json', 'w', encoding='utf-8') as f:
+    products_path = os.path.join(data_dir, 'all_products_openfoodfacts.json')
+    with open(products_path, 'w', encoding='utf-8') as f:
         json.dump(products, f, indent=2, ensure_ascii=False)
-    logging.info("Saved to data/openfoodfacts_products.json")
-
-    # Save a small sample (first 100 records) for demo/testing
-    sample_size = min(100, len(products))
-    sample_products = products[:sample_size]
-    with open('data/openfoodfacts_sample.json', 'w', encoding='utf-8') as f:
-        json.dump(sample_products, f, indent=2, ensure_ascii=False)
-    logging.info(f"Saved a sample of {sample_size} products to data/openfoodfacts_sample.json")
+    logging.info(f"Saved to {products_path}")
 
     # Log a sample of the collected products for verification
     logging.info("Sample products:")

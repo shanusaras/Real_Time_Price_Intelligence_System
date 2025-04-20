@@ -36,8 +36,42 @@ An educational demonstration project showcasing a modern data pipeline for price
 ### How It Works
 - Fetches products in batches (pages) using the Open Food Facts API
 - Retries failed requests up to 3 times with exponential backoff
-- Logs errors to `openfoodfacts_errors.log` for transparency
-- Saves the complete dataset to `openfoodfacts_products.json` for downstream ETL and analytics
+- Logs errors to `scrape_all_products_errors.log` for transparency
+- Saves the complete dataset to `all_products_openfoodfacts.json` for downstream ETL and analytics
+
+### Data Collection Folder Structure & Workflow
+
+The `data_collection/` folder is organized for maximum clarity and ease of use:
+
+| File/Folder                           | Purpose                                                      |
+|---------------------------------------|--------------------------------------------------------------|
+| scrape_all_products.py                | Main, broad scraper for all products (up to 25,000)          |
+| extract_categories_from_all_products.py| Categorizes the all-products dataset into 5 business-relevant categories |
+| create_sample_from_dataset.py         | Creates a 100-record sample from any dataset for demo/testing |
+| scrape_top_categories_direct.py       | (Optional) Directly scrapes only the top 5 business categories from the API |
+| scrape_all_products.log               | Log file for main scraping script                            |
+| scrape_all_products_errors.log        | Error log for main scraper                                   |
+| scrape_top_categories_direct.log      | Log file for direct multi-category scraping                  |
+| data/                                | All JSON data files (outputs from scripts)                   |
+| ├── all_products_openfoodfacts.json   | Full general dataset (25,000 products)                       |
+| ├── sample_all_products.json          | 100-record sample for demo/testing                           |
+| ├── all_products_by_category.json     | Products grouped by the 5 business categories                |
+| └── top_categories_direct_scrape.json | (Optional) Direct scrape of top 5 categories                 |
+
+#### Recommended Workflow
+
+1. **Broad Scraping:**
+   - Run `scrape_all_products.py` to collect all products (`all_products_openfoodfacts.json`).
+   - Logs: `scrape_all_products.log`, errors in `scrape_all_products_errors.log`.
+2. **Category Extraction:**
+   - Run `extract_categories_from_all_products.py` to group products by business category (`all_products_by_category.json`).
+3. **Sample Creation:**
+   - Run `create_sample_from_dataset.py` to create a small sample (`sample_all_products.json`).
+4. **(Optional) Direct Category Scraping:**
+   - Run `scrape_top_categories_direct.py` to scrape only the 5 business categories (`top_categories_direct_scrape.json`).
+   - Log: `scrape_top_categories_direct.log`.
+
+This structure makes it easy to identify, run, and analyze each stage of the data pipeline for both demonstration and practical use.
 
 ### Sample Output
 
