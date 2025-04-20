@@ -38,10 +38,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - MYSQL_HOST=mysql
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=smartie@123.
-      - MYSQL_DB=price_intelligence
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DB=${MYSQL_DATABASE}
     depends_on:
       - mysql
 
@@ -53,10 +53,10 @@ services:
     ports:
       - "8501:8501"
     environment:
-      - MYSQL_HOST=mysql
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=smartie@123.
-      - MYSQL_DB=price_intelligence
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DB=${MYSQL_DATABASE}
     depends_on:
       - mysql
       - fastapi
