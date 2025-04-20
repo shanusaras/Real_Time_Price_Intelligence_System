@@ -65,6 +65,8 @@ The `data_collection/` folder is organized for maximum clarity and ease of use:
    - Logs: `scrape_all_products.log`, errors in `scrape_all_products_errors.log`.
 2. **Category Extraction:**
    - Run `extract_categories_from_all_products.py` to group products by business category (`all_products_by_category.json`).
+   - **For this project, all further analysis and dashboards use `all_products_by_category.json` as the primary input.**
+   - **Rationale:** Using a categorized file mirrors real-world business analytics, where segmentation by category enables more actionable insights, targeted visualizations, and practical decision-making. This approach ensures the pipeline reflects real-world problem-solving and business intelligence best practices.
 3. **Sample Creation:**
    - Run `create_sample_from_dataset.py` to create a small sample (`sample_all_products.json`).
 4. **(Optional) Direct Category Scraping:**
