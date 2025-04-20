@@ -27,3 +27,7 @@ Thumbs.db
 *.7z
 *.exe
 *.bin
+
+# Ignore example and internal files
+.env.example
+allfileshas.txt
