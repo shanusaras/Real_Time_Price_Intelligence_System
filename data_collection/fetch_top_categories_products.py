@@ -4,6 +4,8 @@ import os
 import time
 import logging
 from requests.exceptions import RequestException
+from dotenv import load_dotenv
+load_dotenv()
 
 # Top 5 business-relevant categories
 CATEGORIES = [
@@ -38,7 +40,8 @@ logging.basicConfig(
 def fetch_category_products(category, max_pages=3):
     products = []
     for page in range(1, max_pages + 1):
-        url = f"https://world.openfoodfacts.org/category/{category}/{page}.json"
+        params = f"category/{category}/{page}.json"
+        url = os.getenv('OFF_API_ENDPOINT') + f"?{params}"
         for attempt in range(1, MAX_RETRIES + 1):
             try:
                 resp = requests.get(url, timeout=15)

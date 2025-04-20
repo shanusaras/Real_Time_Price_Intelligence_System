@@ -5,14 +5,14 @@ services:
     image: mysql:8.0
     container_name: price_intelligence_mysql
     environment:
-      MYSQL_ROOT_PASSWORD: smartie@123.
-      MYSQL_DATABASE: price_intelligence
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-psmartie@123."]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
       interval: "10s"
       timeout: "5s"
       retries: 5
