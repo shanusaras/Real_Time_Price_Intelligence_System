@@ -41,4 +41,7 @@ allfileshas.txt
 *.pem
 *.crt
 
+# Backup from git-filter-repo cleanup
+git-filter-repo/
+
 # End of ignore file
