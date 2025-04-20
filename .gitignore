@@ -1,4 +1,15 @@
-# Ignore large dataset files
-/data_collection/data/openfoodfacts_products.json
-/data_collection/data/openfoodfacts_sample.json
+# Python cache and environment
+__pycache__/
+*.pyc
 venv/
+.env
+
+# Data files (large, auto-generated)
+data_collection/data/*.json
+
+# Log files
+data_collection/*.log
+
+# System files
+.DS_Store
+Thumbs.db
