@@ -5,11 +5,25 @@ venv/
 .env
 
 # Data files (large, auto-generated)
-data_collection/data/*.json
+data/
+data_collection/data/
+*.json
+*.csv
+*.parquet
+*.pkl
+*.bin
 
 # Log files
-data_collection/*.log
+*.log
 
 # System files
 .DS_Store
 Thumbs.db
+
+# Archives and binaries
+*.gz
+*.zip
+*.tar
+*.7z
+*.exe
+*.bin
