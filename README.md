@@ -51,7 +51,39 @@ Attempted Flipkart scraping but faced heavy anti-bot protection. Pivoted to Open
 
 ## 📁 Project Structure
 
-Real_Time_Price_Intelligence_System/ │ ├── data/ → Raw + cleaned datasets (JSON, CSV) ├── notebooks/ → Jupyter Notebooks (EDA, Modeling) ├── scripts/ → Data scraping, transformation scripts ├── dashboards/ → Streamlit (planned) ├── models/ → Trained ML models (upcoming) ├── requirements.txt → Python dependencies └── README.md → You are here
+Real_Time_Price_Intelligence_System/
+│
+├── data_collection/
+│   ├── create_sample_from_dataset.py  
+│   ├── extract_categories_from_all_products.py  
+│   ├── fetch_top_categories_products.py  
+│   ├── scrape_all_products.py  
+│   └── scrape_top_categories_direct.py  
+│
+├── eda_notebooks/                # 🔜 Exploratory Data Analysis (coming up next)
+│   └── eda_flipkart_products.ipynb  
+│
+├── dashboard/                    # 🔜 Streamlit/PowerBI dashboard (upcoming)
+│   └── price_dashboard_app.py  
+│
+├── ml_model/                     # 🔜 ML modeling phase (planned)
+│   ├── feature_engineering.py  
+│   ├── model_training.py  
+│   └── model_inference.py  
+│
+├── deployment/                   # 🔜 Deployment configs & APIs (planned)
+│   ├── api/
+│   │   └── fastapi_app.py  
+│   ├── Dockerfile  
+│   └── config/
+│       └── settings.yaml  
+│
+├── .gitignore  
+├── .pre-commit-config.yaml  
+├── README.md  
+├── docker-compose.yml  
+└── requirements.txt
+
 
 ---
 
