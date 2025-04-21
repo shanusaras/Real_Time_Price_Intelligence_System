@@ -34,6 +34,7 @@ To simulate real-world scale:
 ## 📂 Sample Dataset (read‑only)
 A 100‑row extract of **all products**:  
 [🔗 Sample Dataset (Google Drive)](https://drive.google.com/file/d/1lv10h0q_ELuV4nGhWJuKLVCrBOMiMXNY/view?usp=sharing)
++![Total raw products count](assets/total_records.png)
 
 ### ⚙️ Pipeline Features:
 
