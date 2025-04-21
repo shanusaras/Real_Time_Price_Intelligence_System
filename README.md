@@ -1,84 +1,103 @@
-# Real-Time Price Intelligence System
+# 🛒 Real-Time Price Intelligence System
 
-## Overview
-A demonstration project that builds a scalable pipeline for real-time price analytics. It covers data collection, storage, API service, and interactive dashboards, all orchestrated via Docker.
+A scalable, end-to-end simulation of a real-world **Price Intelligence System** for e-commerce, powered by clean pipelines, structured data, and business-aligned insights.
 
-## Current Focus
-**Phase 1 – Data Collection**: Enhancing multi-category scraping with proxy rotation, rate limiting, and robust error handling for continuous data ingestion.
+---
 
-## Features Completed
-- **Data Collection**: Python scripts to fetch multi-category data from Open Food Facts API with retries, logging, and pagination.
-- **Storage & ETL**: MySQL integration via Docker Compose; automated ETL to transform raw JSON into structured tables.
-- **API Service**: FastAPI backend exposing REST endpoints for price retrieval and analytics.
-- **Dashboard**: Streamlit app for visualizing price trends and category comparisons.
-- **Infrastructure & Security**: Docker Compose orchestration; environment variables for credentials; pre-commit hooks for secrets and large-file detection; comprehensive `.gitignore`.
+## 🚧 Project Status: Phase 1 Complete
 
-## Tech Stack
-- **Language**: Python 3.8+
-- **API**: FastAPI
-- **Database**: MySQL 8.0
-- **Dashboard**: Streamlit
-- **Containerization**: Docker & Docker Compose
-- **CI**: pre-commit hooks (detect-aws-credentials, detect-private-key, large-file checks, secret_scanner)
+**✔ 20,000+ products scraped**  
+**✔ Robust data pipeline built**  
+**✔ Business-driven categorization logic applied**  
+➡️ *Next: EDA, ML modeling, real-time dashboard, deployment*
 
-## Project Structure
-```plaintext
-Real_Time_Price_Intelligence_System/
-├── data_collection/         # Scraping scripts
-│   ├── fetch_openfoodfacts_products.py
-│   ├── extract_categories_from_all_products.py
-│   └── create_sample_from_dataset.py
-├── data/                    # Raw JSON outputs
-├── api/                     # FastAPI service and Dockerfile
-│   └── api.Dockerfile
-├── dashboard/               # Streamlit app and Dockerfile
-│   └── dashboard.Dockerfile
-├── docker-compose.yml       # Services definitions (with env placeholders)
-├── .pre-commit-config.yaml  # Security hooks config
-├── .gitignore               # Ignored files
-└── README.md                # Project documentation
-```
+---
 
-## Getting Started
-### Prerequisites
-- Docker & Docker Compose
-- Python 3.8+ (for local scripts)
+## 📦 Project Summary
 
-### Installation
-```bash
-# Clone the repository
-git clone https://github.com/shanusaras/Real_Time_Price_Intelligence_System.git
-cd Real_Time_Price_Intelligence_System
-# Prepare environment variables
-cp .env.example .env
-# Edit .env with your MySQL credentials
-```
+In e-commerce, pricing strategy is critical — it directly affects revenue, profit margins, and market competitiveness. This project builds the foundation of a system that helps businesses:
 
-### Launch Services
-```bash
-docker-compose up --build
-```
+- Continuously **track competitor pricing**
+- **Analyze price trends**
+- Optimize pricing using **ML-based recommendations**
 
-## Usage
-- **Run Data Collection:** `python data_collection/fetch_openfoodfacts_products.py`
-- **API Documentation:** http://localhost:8000/docs
-- **Dashboard:** http://localhost:8501
+---
 
-## Environment Variables
-Add these to your `.env` file:
-```ini
-MYSQL_ROOT_PASSWORD=your_root_password
-MYSQL_DATABASE=price_intelligence
-MYSQL_HOST=mysql
-MYSQL_USER=root
-MYSQL_PASSWORD=your_db_password
-```
+## 🔁 Phase 1: Scalable Data Collection Pipeline
 
-## Next Steps
-- Implement proxy rotation and continuous scraping enhancements.
-- Develop advanced analytics and ML models.
-- Add automated alerts and reporting.
-- Integrate CI/CD security and testing workflows.
+To simulate real-world scale:
 
-## License
-MIT License – see [LICENSE](LICENSE) for details.
+- ✅ Scraped **20,000+ products** using the [Open Food Facts API](https://world.openfoodfacts.org/data)
+- ✅ Covered **15 major categories × 120+ pages**
+- ✅ Generated structured data in **JSON + CSV** formats
+
+### ⚙️ Pipeline Features:
+
+- Retry logic with **exponential backoff**
+- Rate-limiting to avoid IP bans
+- Logging + fault tolerance
+- **Post-scraping categorization** using business keywords:
+  - Snacks
+  - Beverages
+  - Dairy
+  - Personal Care
+  - Health Supplements
+
+### 🧠 Why Open Food Facts?
+
+Attempted Flipkart scraping but faced heavy anti-bot protection. Pivoted to Open Food Facts — an open-source, ethical, large-scale API ideal for simulation.
+
+---
+
+## 📁 Project Structure
+
+Real_Time_Price_Intelligence_System/ │ ├── data/ → Raw + cleaned datasets (JSON, CSV) ├── notebooks/ → Jupyter Notebooks (EDA, Modeling) ├── scripts/ → Data scraping, transformation scripts ├── dashboards/ → Streamlit (planned) ├── models/ → Trained ML models (upcoming) ├── requirements.txt → Python dependencies └── README.md → You are here
+
+---
+
+## 🛠️ Tech Stack
+
+- **Python** (Requests, Pandas, NumPy, JSON, Regex)
+- **API Handling** (Open Food Facts)
+- **Data Processing** (Pandas)
+- **Visualization** (Matplotlib, Seaborn – upcoming)
+- **ML Modeling** (scikit-learn – upcoming)
+- **Dashboards** (Streamlit – upcoming)
+
+---
+
+## 📊 What’s Next
+
+- 📌 Exploratory Data Analysis (EDA) on pricing patterns
+- 📌 Real-time interactive dashboard with filters
+- 📌 ML model to detect price anomalies + suggest optimal pricing
+- 📌 Full **ETL → ML → Deployment** pipeline
+
+---
+
+## 💡 Key Learnings
+
+- Reliable scraping pipelines must be **fault-tolerant, ethical, and scalable**
+- **Business-aligned categorization** beats raw category tags
+- Clean, structured data unlocks downstream insights and automation
+
+---
+
+## 🤝 Connect & Discuss
+
+Curious what pricing signals **you** think are most critical for modern e-commerce?  
+Drop a suggestion or open an issue!
+
+📬 [LinkedIn](https://www.linkedin.com/in/shanusaraswat) | [Project Post](#) *(add your live post URL)*
+
+---
+
+## 📄 License
+
+MIT License — feel free to fork, build on, or improve.
+
+---
+
+## 🙌 Contributions
+
+Got an idea or improvement? PRs and suggestions are welcome.
