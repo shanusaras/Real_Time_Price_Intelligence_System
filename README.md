@@ -33,8 +33,7 @@ To simulate real-world scale:
 
 ## 📂 Sample Dataset (read‑only)
 A 100‑row extract of **all products**:  
-[🔗 Sample Dataset (Google Drive)](https://drive.google.com/file/d/1iQcHfFZsVPW61lQQ-yvBLsWvpf-EbDpZ/view?usp=sharing)
-
+[🔗 Sample Dataset (Google Drive)](https://drive.google.com/file/d/1lv10h0q_ELuV4nGhWJuKLVCrBOMiMXNY/view?usp=sharing)
 
 ### ⚙️ Pipeline Features:
 
