@@ -4,13 +4,8 @@ __pycache__/
 venv/
 .env
 
-# Data files (large, auto-generated)
-data/
-data_collection/data/
+# Data files (large, auto-generated JSON)
 *.json
-*.csv
-*.parquet
-*.pkl
 
 # Log files
 *.log

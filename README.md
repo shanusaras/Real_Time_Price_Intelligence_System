@@ -21,22 +21,64 @@ A demonstration project that builds a scalable pipeline for real-time price anal
 - **Containerization**: Docker & Docker Compose
 - **CI**: pre-commit hooks (detect-aws-credentials, detect-private-key, large-file checks, secret_scanner)
 
+## Project Phases & Roadmap
+
+### Phase 1: Data Collection
+Folder: `data_collection/`
+- Scripts to scrape OpenFoodFacts and Flipkart
+- Implement proxy rotation, rate limiting, retries
+- Save raw JSON outputs in `data_collection/data/`
+
+### Phase 2: Data Storage & ETL
+Folder: `etl/`
+- `load_to_mysql.py`: Bulk load full JSON from `data_collection/data/` into MySQL
+- `transform.py`: Clean, normalize, enrich data (pandas or SQL)
+- `sql/`: DDL for tables, views, stored procedures
+- `config/`: Connection templates, env parsing
+
+### Phase 3: API & Backend Services
+Folder: `api/`
+- FastAPI endpoints for querying products, categories
+- Swagger/OpenAPI docs
+- Dockerfile for API service
+
+### Phase 4: Dashboard & Visualization
+Folder: `dashboard/`
+- Streamlit or React dashboard for trends and comparisons
+- Charts: price over time, category comparisons
+- Dockerfile for dashboard service
+
+### Phase 5: Advanced Analytics & ML
+Folder: `ml/`
+- Price forecasting models (time series)
+- Anomaly detection on price changes
+- Market basket analysis
+- Automated insights via scheduled jobs
+
+### Phase 6: Integration & Deployment
+- Container orchestration (Docker Compose / Kubernetes)
+- CI/CD pipelines (GitHub Actions)
+- Monitoring & alerts
+
 ## Project Structure
 ```plaintext
 Real_Time_Price_Intelligence_System/
-├── data_collection/         # Scraping scripts
-│   ├── fetch_openfoodfacts_products.py
+├── data_collection/               # Scraping scripts and utilities
+│   ├── data/                      # Raw JSON outputs
+│   ├── create_sample_from_dataset.py
 │   ├── extract_categories_from_all_products.py
-│   └── create_sample_from_dataset.py
-├── data/                    # Raw JSON outputs
-├── api/                     # FastAPI service and Dockerfile
-│   └── api.Dockerfile
-├── dashboard/               # Streamlit app and Dockerfile
-│   └── dashboard.Dockerfile
-├── docker-compose.yml       # Services definitions (with env placeholders)
-├── .pre-commit-config.yaml  # Security hooks config
-├── .gitignore               # Ignored files
-└── README.md                # Project documentation
+│   ├── fetch_top_categories_products.py
+│   ├── scrape_all_products.py
+│   ├── scrape_top_categories_direct.py
+│   └── [*.log]                    # Log files
+├── docker-compose.yml             # Services definitions
+├── .env.template                  # Environment variables template
+├── requirements.txt               # Python dependencies
+├── .pre-commit-config.yaml        # Security hooks config
+├── .gitignore                     # Ignored files
+├── README.md                      # Project documentation
+├── git-filter-repo/               # Git filter repository data
+└── venv/                          # Virtual environment (ignored)
 ```
 
 ## Getting Started
@@ -75,10 +117,9 @@ MYSQL_PASSWORD=your_db_password
 ```
 
 ## Next Steps
-- Implement proxy rotation and continuous scraping enhancements.
-- Develop advanced analytics and ML models.
-- Add automated alerts and reporting.
-- Integrate CI/CD security and testing workflows.
+- Scaffold `etl/` directory and add loader script
+- Define table schemas and transformation logic
+- Schedule ETL jobs (e.g., Airflow)
 
 ## License
 MIT License – see [LICENSE](LICENSE) for details.
