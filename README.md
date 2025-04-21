@@ -51,7 +51,26 @@ Attempted Flipkart scraping but faced heavy anti-bot protection. Pivoted to Open
 
 ## 📁 Project Structure
 
-<pre> ## 📁 Project Structure ```bash Real_Time_Price_Intelligence_System/ ├── data_collection/ │ ├── create_sample_from_dataset.py │ ├── extract_categories_from_all_products.py │ ├── fetch_top_categories_products.py │ ├── scrape_all_products.py │ └── scrape_top_categories_direct.py │ ├── eda_notebooks/ # 🔄 Exploratory Data Analysis (coming up next) │ └── eda_flipkart_products.ipynb │ ├── dashboard/ # 📊 Streamlit/PowerBI dashboard (upcoming) │ └── price_dashboard_app.py │ ├── ml_model/ # 🤖 ML modeling phase (planned) │ ├── feature_engineering.py │ ├── model_training.py │ └── model_inference.py │ ├── deployment/ # 🚀 Deployment configs & APIs (planned) │ └── api/ │ └── fastapi_app.py │ ├── Dockerfile ├── config/ │ └── settings.yaml ├── .gitignore ├── .pre-commit-config.yaml ├── README.md ├── docker-compose.yml └── requirements.txt ``` </pre>
+## Project Structure
+```plaintext
+Real_Time_Price_Intelligence_System/
+├── data_collection/               # Scraping scripts and utilities
+│   ├── data/                      # Raw JSON outputs
+│   ├── create_sample_from_dataset.py
+│   ├── extract_categories_from_all_products.py
+│   ├── fetch_top_categories_products.py
+│   ├── scrape_all_products.py
+│   ├── scrape_top_categories_direct.py
+│   └── [*.log]                    # Log files
+├── docker-compose.yml             # Services definitions
+├── .env.template                  # Environment variables template
+├── requirements.txt               # Python dependencies
+├── .pre-commit-config.yaml        # Security hooks config
+├── .gitignore                     # Ignored files
+├── README.md                      # Project documentation
+├── git-filter-repo/               # Git filter repository data
+└── venv/                          # Virtual environment (ignored)
+```
 
 
 ---
