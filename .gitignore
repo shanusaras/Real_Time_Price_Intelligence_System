@@ -39,4 +39,7 @@ allfileshas.txt
 # Backup from git-filter-repo cleanup
 git-filter-repo/
 
+# Generated sample files
+data_collection/data/sample_by_category.json
+
 # End of ignore file
