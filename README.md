@@ -31,6 +31,11 @@ To simulate real-world scale:
 - ✅ Covered **15 major categories × 120+ pages**
 - ✅ Generated structured data in **JSON + CSV** formats
 
+## 📂 Sample Dataset (read‑only)
+A 100‑row extract of **all products**:  
+[🔗 Sample Dataset (Google Drive)](https://drive.google.com/file/d/1iQcHfFZsVPW61lQQ-yvBLsWvpf-EbDpZ/view?usp=sharing)
+
+
 ### ⚙️ Pipeline Features:
 
 - Retry logic with **exponential backoff**
