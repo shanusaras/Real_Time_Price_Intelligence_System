@@ -99,8 +99,10 @@ Folder: `ml/`
 Real_Time_Price_Intelligence_System/
 ├── data_collection/               # Scraping scripts and utilities
 │   ├── data/                      # Raw JSON outputs
-│   ├── create_sample_from_dataset.py
+│   │   ├── sample_all_products.json
+│   │   └── sample_by_category.json  # Generated sample
 │   ├── extract_categories_from_all_products.py
+│   ├── generate_sample.py         # Builds categorized sample JSON
 │   ├── fetch_top_categories_products.py
 │   ├── scrape_all_products.py
 │   ├── scrape_top_categories_direct.py
