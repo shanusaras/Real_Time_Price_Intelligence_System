@@ -1,43 +1,32 @@
-"""
-Transform raw data loaded into MySQL. Clean, normalize, and enrich.
-"""
 import os
 import pandas as pd
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 
+"""
+ETL Transform:
+- Reads raw JSON from Jumia scrape
+- Cleans and normalizes
+- Loads to database or exports CSV
+"""
 
 def main():
     load_dotenv()
-    # DB connection
-    user = os.getenv('MYSQL_USER')
-    pwd = os.getenv('MYSQL_PASSWORD')
-    host = os.getenv('MYSQL_HOST', 'localhost')
-    port = os.getenv('MYSQL_PORT', '3306')
-    db = os.getenv('MYSQL_DATABASE')
-    conn_str = f"mysql+pymysql://{user}:{pwd}@{host}:{port}/{db}"
-    engine = create_engine(conn_str)
+    # DB connection parameters (if needed)
+    engine = None  # Placeholder for SQLAlchemy engine
 
-    # Load raw table
-    print("Reading raw products table...")
-    df = pd.read_sql_table('products', engine)
-    print(f"Loaded {len(df)} records.")
+    # Load raw Jumia JSON
+    raw_path = os.path.join(os.path.dirname(__file__), '..', 'data_collection', 'data', 'jumia_products.json')
+    df = pd.read_json(raw_path)
+    print(f"Loaded {len(df)} records from Jumia JSON.")
 
-    # TODO: Data cleaning
-    # - Convert price to numeric
-    # - Parse date fields
-    # - Drop duplicates
-    # - Fill missing values
+    # TODO: Data cleaning (e.g., drop duplicates, fill NAs)
 
-    # TODO: Enrichment
-    # - Derive unit_price
-    # - Flag categories
-
-    # Write cleaned data to new table
-    cleaned_table = 'products_clean'
-    df.to_sql(cleaned_table, engine, if_exists='replace', index=False)
-    print(f"Written cleaned data ({len(df)} rows) to table '{cleaned_table}'")
-
+    # Example: Export to CSV for analysis
+    out_csv = os.path.join(os.path.dirname(__file__), 'output', 'jumia_products_clean.csv')
+    os.makedirs(os.path.dirname(out_csv), exist_ok=True)
+    df.to_csv(out_csv, index=False)
+    print(f"Clean data exported to {out_csv}")
 
 if __name__ == '__main__':
     main()

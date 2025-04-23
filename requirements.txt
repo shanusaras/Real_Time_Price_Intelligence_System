@@ -29,3 +29,6 @@ black==23.10.1
 flake8==6.1.0
 pre-commit==3.5.0
 free-proxy>=1.1.1
+
+# Headless browser for JS-rendered scraping
+playwright==1.35.0
