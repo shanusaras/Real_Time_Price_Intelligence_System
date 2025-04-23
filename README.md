@@ -37,6 +37,17 @@ To collect rich pricing data at scale:
 
 ---
 
+## ⚖️ Ethical Scraping & Disclaimer
+
+We follow these ethical guidelines for all scraping activities:
+- Respect **robots.txt** and each site's **Terms of Service**
+- Apply **rate limiting** and **proxy rotation** to avoid overloading servers
+- Identify our scraper responsibly with a **custom User-Agent**
+- Avoid collecting **personal or sensitive data**
+- Comply with all applicable **legal regulations and privacy policies**
+
+---
+
 ## 📁 Project Structure
 
 ```plaintext
