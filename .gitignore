@@ -43,11 +43,7 @@ dump.sql
 etl/output/
 
 ## Raw scraped data (JSON)
-# Keep full dataset private, track sample directory
 data_collection/raw_data/
-data/
-
-# Debug artifacts (HTML)
 data_collection/data/debug_*.html
 
 # Docker configs and local override
