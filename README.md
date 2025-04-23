@@ -29,6 +29,11 @@ To collect rich pricing data at scale:
 - ✅ Covered **10 major categories × up to 50 pages** per category
 - ✅ Stored results in structured **JSON** format (`data_collection/data/jumia_playwright.json`)
 
+## 📂 Sample Dataset (read‑only)
+
+A 100‑row extract of all products:  
+`data_collection/data/sample_by_category.json`
+
 ### ⚙️ Pipeline Features:
 - Retry logic with **exponential backoff**
 - Navigation timeouts and **selector-based waits**
