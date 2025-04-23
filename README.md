@@ -6,129 +6,74 @@ A scalable, end-to-end simulation of a real-world **Price Intelligence System** 
 
 ## 🚧 Project Status: Phase 1 Complete
 
-**✔ 20,000+ products scraped**  
-**✔ Robust data pipeline built**  
-**✔ Business-driven categorization logic applied**  
-➡️ *Next: EDA, ML modeling, real-time dashboard, deployment*
+- **✔ Scalable Jumia data scraping implemented**  
+- **✔ Robust data pipeline built**  
+- **✔ Business-driven categorization logic applied**  
+- ➡️ *Next: ETL & data cleaning, API endpoints, ML modeling, dashboard visualization*
 
 ---
 
 ## 📦 Project Summary
 
 In e-commerce, pricing strategy is critical — it directly affects revenue, profit margins, and market competitiveness. This project builds the foundation of a system that helps businesses:
-
-- Continuously **track competitor pricing**
-- **Analyze price trends**
-- Optimize pricing using **ML-based recommendations**
+- Continuously **track competitor product prices** on Jumia
+- **Capture detailed product metadata** (title, brand, price, discount, rating, reviews, availability)
+- Optimize pricing and promotional strategies using **data-driven insights**
 
 ---
 
 ## 🔁 Phase 1: Scalable Data Collection Pipeline
 
-To simulate real-world scale:
-
-- ✅ Scraped **20,000+ products** using the [Open Food Facts API](https://world.openfoodfacts.org/data)
-- ✅ Covered **15 major categories × 120+ pages**
-- ✅ Generated structured data in **JSON + CSV** formats
-
-## 📂 Sample Dataset (read‑only)
-A 100‑row extract of **all products**:  
-[🔗 Sample Dataset (Google Drive)](https://drive.google.com/file/d/1lv10h0q_ELuV4nGhWJuKLVCrBOMiMXNY/view?usp=sharing)
-+![Total raw products count](assets/total_records.png)
+To collect rich pricing data at scale:
+- ✅ Scraped **18,983 products** (≈19,000) using Playwright from Jumia
+- ✅ Covered **10 major categories × up to 50 pages** per category
+- ✅ Stored results in structured **JSON** format (`data_collection/data/jumia_playwright.json`)
 
 ### ⚙️ Pipeline Features:
-
 - Retry logic with **exponential backoff**
-- Rate-limiting to avoid IP bans
-- Logging + fault tolerance
-- **Post-scraping categorization** using business keywords:
-  - Snacks
-  - Beverages
-  - Dairy
-  - Personal Care
-  - Health Supplements
-
-### 🧠 Why Open Food Facts?
-
-Attempted Flipkart scraping but faced heavy anti-bot protection. Pivoted to Open Food Facts — an open-source, ethical, large-scale API ideal for simulation.
+- Navigation timeouts and **selector-based waits**
+- Tracking and skipping of timed-out pages
+- Extraction of **brand**, **discount_pct**, **rating**, **reviews**, **in_stock** fields
 
 ---
 
 ## 📁 Project Structure
 
-## Project Phases & Roadmap
-
-### Phase 1: Data Collection
-Folder: `data_collection/`
-- Scripts to scrape OpenFoodFacts and Flipkart
-- Implement proxy rotation, rate limiting, retries
-- Save raw JSON outputs in `data_collection/data/`
-
-### Phase 2: Data Storage & ETL
-Folder: `etl/`
-- `load_to_mysql.py`: Bulk load full JSON from `data_collection/data/` into MySQL
-- `transform.py`: Clean, normalize, enrich data (pandas or SQL)
-- `sql/`: DDL for tables, views, stored procedures
-- `config/`: Connection templates, env parsing
-
-### Phase 3: API & Backend Services
-Folder: `api/`
-- FastAPI endpoints for querying products, categories
-- Swagger/OpenAPI docs
-- Dockerfile for API service
-
-### Phase 4: Dashboard & Visualization
-Folder: `dashboard/`
-- Streamlit or React dashboard for trends and comparisons
-- Charts: price over time, category comparisons
-- Dockerfile for dashboard service
-
-### Phase 5: Advanced Analytics & ML
-Folder: `ml/`
-- Price forecasting models (time series)
-- Anomaly detection on price changes
-- Market basket analysis
-- Automated insights via scheduled jobs
-
-### Phase 6: Integration & Deployment
-- Container orchestration (Docker Compose / Kubernetes)
-- CI/CD pipelines (GitHub Actions)
-- Monitoring & alerts
-
-## Project Structure
 ```plaintext
 Real_Time_Price_Intelligence_System/
-├── data_collection/               # Scraping scripts and utilities
+├── data_collection/               # Scraper and raw data
 │   ├── data/                      # Raw JSON outputs
-│   │   ├── sample_all_products.json
-│   │   └── sample_by_category.json  # Generated sample
-│   ├── extract_categories_from_all_products.py
-│   ├── generate_sample.py         # Builds categorized sample JSON
-│   ├── fetch_top_categories_products.py
-│   ├── scrape_all_products.py
-│   ├── scrape_top_categories_direct.py
-│   └── [*.log]                    # Log files
-├── docker-compose.yml             # Services definitions
-├── .env.template                  # Environment variables template
-├── requirements.txt               # Python dependencies
-├── .pre-commit-config.yaml        # Security hooks config
-├── .gitignore                     # Ignored files
-├── README.md                      # Project documentation
-├── git-filter-repo/               # Git filter repository data
-└── venv/                          # Virtual environment (ignored)
+│   │   ├── jumia_playwright.json
+│   │   └── sample_by_category.json
+│   └── scrape_jumia_playwright.py # Playwright-based Jumia scraper
+├── api/                           # FastAPI backend
+│   └── main.py
+├── etl/                           # ETL and data cleaning scripts
+│   ├── transform.py
+│   └── load_to_mysql.py
+├── ml/                            # Machine learning models
+│   └── model.py
+├── dashboard/                     # Visualization dashboard
+│   └── app.py
+├── assets/                        # Static assets (images, icons)
+├── docker-compose.yml            # Service orchestration
+├── requirements.txt              # Python dependencies
+├── .env.template                 # Environment variables template
+├── .pre-commit-config.yaml       # Linting and security hooks
+├── .gitignore                    # Ignored files
+└── README.md                     # Project documentation
 ```
-
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Python** (Requests, Pandas, NumPy, JSON, Regex)
-- **API Handling** (Open Food Facts)
-- **Data Processing** (Pandas)
-- **Visualization** (Matplotlib, Seaborn – upcoming)
-- **ML Modeling** (scikit-learn – upcoming)
-- **Dashboards** (Streamlit – upcoming)
+- **Python** (Playwright, Pandas, NumPy)  
+- **API** (FastAPI)  
+- **Data Processing** (Pandas)  
+- **Visualization** (Streamlit – upcoming)  
+- **ML Modeling** (scikit-learn – upcoming)  
+- **Containerization** (Docker)
 
 ---
 
