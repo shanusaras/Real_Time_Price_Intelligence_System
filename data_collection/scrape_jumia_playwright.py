@@ -3,6 +3,11 @@ import json
 import os
 import math
 
+"""
+Scrape product data from Jumia (a leading e-commerce platform in Nigeria) using Playwright
+(a headless browser automation library) for reliable, JS-rendered page interactions.
+"""
+
 # Configuration
 data_collection = os.path.dirname(__file__)
 # Configuration: expand to 10 categories
