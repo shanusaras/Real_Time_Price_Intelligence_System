@@ -1,45 +1,73 @@
-# Python cache and environment
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+env/
 venv/
+.venv/
+
+# Environment files
 .env
+.env.*
 
-# Data files (large, auto-generated JSON)
-*.json
+# IDE / Editor directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
 
-# Log files
-*.log
-
-# System files
+# OS generated files
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs and coverage reports
+logs/
+*.log
+.coverage
+htmlcov/
+
+# Databases and SQL dumps
+*.db
+*.sqlite3
+*.sql
+dump.sql
+
+# ETL outputs
+etl/output/
+
+# Raw scraped data (JSON)
+data_collection/data/
+data_collection/raw_data/
+data/
+
+# Debug artifacts (HTML)
+data_collection/data/debug_*.html
+
+# Docker configs and local override
+docker-compose.override.yml
+docker-compose.*.local.yml
+.docker/
+
+# Build directories and package info
+build/
+dist/
+*.egg-info/
 
 # Archives and binaries
+*.tar
 *.gz
 *.zip
-*.tar
 *.7z
 *.exe
 
-# Ignore example and internal files
-.env.example
-allfileshas.txt
-
-# Security additions
-**/.env*
-**/secrets/
-**/aws_config.json
-**/azure_cred.yaml
-**/gcp_*.conf
-**/snowflake.cfg
+# Certificates and private keys
 *.key
 *.pem
 *.crt
-
-# Backup from git-filter-repo cleanup
-git-filter-repo/
-
-# Generated sample files
-data_collection/data/sample_by_category.json
-
-# End of ignore file
