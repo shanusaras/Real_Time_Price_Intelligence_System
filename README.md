@@ -112,7 +112,7 @@ Real_Time_Price_Intelligence_System/
 Curious what pricing signals **you** think are most critical for modern e-commerce?  
 Drop a suggestion or open an issue!
 
-📬 [LinkedIn](https://www.linkedin.com/in/saraswathi-rajendran-29b962205/) | [Project Post](#) *(add post URL)*
+📬 [LinkedIn](https://www.linkedin.com/in/saraswathi-rajendran-29b962205/) | [Project Post](https://www.linkedin.com/posts/saraswathi-rajendran-29b962205_code-output-data-structure-overview-activity-7320722521702416384-owjx?utm_source=share&utm_medium=member_desktop&rcm=ACoAADRJ8RcBz7fP5ZlIlPiAzGhQ2unlizFiXNQ)
 
 ---
 
