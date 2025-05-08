@@ -4,14 +4,34 @@ A scalable, end-to-end simulation of a real-world **Price Intelligence System** 
 
 ---
 
-## 🚦 Project Status: Data Collection & ETL Complete
+## 🚦 Project Status: API & Analytics Ready
 
 - **✔ Scalable Jumia data scraping implemented**  
-- **✔ Robust data pipeline built**  
-- **✔ Business-driven categorization logic applied**  
-- **✔ ETL pipeline: JSON → MySQL (products & price_history)**
-- **✔ Data cleaning, deduplication, normalization complete**
-- ➡️ *Next: API endpoints, ML modeling, dashboard visualization*
+- **✔ Robust ETL pipeline built (JSON → MySQL)**  
+- **✔ Data cleaning, deduplication, normalization complete**  
+- **✔ Core API endpoints for product analytics, category insights, and KPIs implemented & tested**
+- ➡️ *Next: ML modeling, dashboard visualization, deployment*
+
+---
+
+## 🛠️ Available API Endpoints
+
+- `/products` — List products with filters (category, brand, price)
+- `/price-history` — Get price history for a product
+- `/categories` — List categories with product count & price stats
+- `/top-rated` — Top-rated products (latest data)
+- `/most-reviewed` — Most-reviewed products (latest data)
+- `/analytics/summary` — Key KPIs: product count, category count, avg price/rating, total reviews
+
+All endpoints use the latest, deduplicated data for accuracy.
+
+---
+
+## 🚧 Next Steps
+
+- Implement ML features (price prediction, anomaly detection)
+- Build interactive dashboard (Streamlit)
+- Dockerize and deploy full stack
 
 ---
 

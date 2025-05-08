@@ -4,6 +4,9 @@ from sqlalchemy.orm import relationship, sessionmaker
 from config import DB_CONFIG
 from urllib.parse import quote_plus
 
+import os
+print("DEBUG: MYSQL_PASSWORD from env =", os.environ.get("MYSQL_PASSWORD"))
+
 # Build the MySQL connection URL with URL-encoded password
 password = quote_plus(DB_CONFIG['password'])
 DATABASE_URL = f"mysql+pymysql://{DB_CONFIG['user']}:{password}@{DB_CONFIG['host']}:{DB_CONFIG['port']}/{DB_CONFIG['database']}"
