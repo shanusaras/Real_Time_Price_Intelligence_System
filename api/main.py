@@ -19,6 +19,7 @@ app = FastAPI(title="Price Intelligence API")
 
 @app.get('/')
 def root():
+    """Health check for API. Business value: Allows monitoring tools and users to verify the API is running."""
     return {"message": "API running"}
 
 @app.get('/products')
@@ -29,7 +30,9 @@ def get_products(
     max_price: Optional[float] = Query(None, description='Maximum price'),
     limit: int = Query(100, ge=1, le=1000, description='Max number of results')
 ):
-    """Fetch products with optional filters from MySQL"""
+    """Fetch products with optional filters from MySQL.
+    Business value: Enables product search, catalog exploration, and inventory analysis.
+    """
     session: Session = SessionLocal()
     try:
         query = session.query(Product)
@@ -75,7 +78,9 @@ def get_price_history(
     end_date: Optional[datetime] = Query(None, description='End date (ISO 8601)'),
     limit: int = Query(1000, ge=1, le=5000, description='Max number of records to return')
 ):
-    """Fetch price history for a product by product_id (preferred) or product_name (optional)."""
+    """Fetch price history for a product by product_id (preferred) or product_name (optional).
+    Business value: Supports price trend analysis and pricing strategy decisions.
+    """
     session = SessionLocal()
     try:
         pid = product_id
@@ -112,7 +117,9 @@ def get_price_history(
 
 @app.get('/categories')
 def get_categories():
-    """List all categories with product count and price stats."""
+    """List all categories with product count and price stats.
+    Business value: Helps identify popular categories and pricing opportunities.
+    """
     session = SessionLocal()
     try:
         from sqlalchemy import func
@@ -146,7 +153,9 @@ def get_categories():
 
 @app.get('/top-rated')
 def get_top_rated(limit: int = 20, category: Optional[str] = None):
-    """List products with the highest ratings (latest record per product)."""
+    """List products with the highest ratings (latest record per product).
+    Business value: Identify trending and high-quality products for promotion or analysis.
+    """
     session = SessionLocal()
     try:
         from sqlalchemy import func
@@ -186,7 +195,9 @@ def get_top_rated(limit: int = 20, category: Optional[str] = None):
 
 @app.get('/most-reviewed')
 def get_most_reviewed(limit: int = 20, category: Optional[str] = None):
-    """List products with the most reviews (latest record per product, deduplicated)."""
+    """List products with the most reviews (latest record per product, deduplicated).
+    Business value: Surface popular and widely-discussed products for marketing or insights.
+    """
     session = SessionLocal()
     try:
         from sqlalchemy import func
@@ -227,7 +238,9 @@ def get_most_reviewed(limit: int = 20, category: Optional[str] = None):
 
 @app.get('/analytics/summary')
 def analytics_summary():
-    """Return key performance indicators (KPIs) for the catalog (latest record per product)."""
+    """Return key performance indicators (KPIs) for the catalog (latest record per product).
+    Business value: Provides at-a-glance business health metrics for the product catalog.
+    """
     session = SessionLocal()
     try:
         from sqlalchemy import func

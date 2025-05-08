@@ -16,12 +16,53 @@ A scalable, end-to-end simulation of a real-world **Price Intelligence System** 
 
 ## 🛠️ Available API Endpoints
 
-- `/products` — List products with filters (category, brand, price)
-- `/price-history` — Get price history for a product
-- `/categories` — List categories with product count & price stats
-- `/top-rated` — Top-rated products (latest data)
-- `/most-reviewed` — Most-reviewed products (latest data)
-- `/analytics/summary` — Key KPIs: product count, category count, avg price/rating, total reviews
+### `/products`
+- **Description:** List products with filters (category, brand, price).
+- **Business Value:** Enables product search, catalog exploration, and inventory analysis.
+- **Example:**
+  ```bash
+  curl "http://localhost:8000/products?category=phones-accessories&min_price=1000&limit=5"
+  ```
+
+### `/price-history`
+- **Description:** Get price, rating, and review history for a product.
+- **Business Value:** Supports price trend analysis and pricing strategy decisions.
+- **Example:**
+  ```bash
+  curl "http://localhost:8000/price-history?product_id=40490"
+  ```
+
+### `/categories`
+- **Description:** List categories with product count and price stats.
+- **Business Value:** Helps identify popular categories and pricing opportunities.
+- **Example:**
+  ```bash
+  curl "http://localhost:8000/categories"
+  ```
+
+### `/top-rated`
+- **Description:** Top-rated products (latest data, deduplicated).
+- **Business Value:** Identify trending and high-quality products for promotion or analysis.
+- **Example:**
+  ```bash
+  curl "http://localhost:8000/top-rated?limit=5"
+  ```
+
+### `/most-reviewed`
+- **Description:** Most-reviewed products (latest data, deduplicated).
+- **Business Value:** Surface popular and widely-discussed products for marketing or insights.
+- **Example:**
+  ```bash
+  curl "http://localhost:8000/most-reviewed?limit=5"
+  ```
+
+### `/analytics/summary`
+- **Description:** Key KPIs: product count, category count, avg price/rating, total reviews.
+- **Business Value:** Provides at-a-glance business health metrics for the product catalog.
+- **Example:**
+  ```bash
+  curl "http://localhost:8000/analytics/summary"
+  ```
 
 All endpoints use the latest, deduplicated data for accuracy.
 
