@@ -4,7 +4,7 @@ import os
 import math
 
 """
-Scrape product data from Jumia (a leading e-commerce platform in Nigeria) using Playwright
+Scraping product data from Jumia (a leading e-commerce platform in Nigeria) using Playwright
 (a headless browser automation library) for reliable, JS-rendered page interactions.
 """
 
@@ -42,6 +42,7 @@ def scrape_category(page, category):
         except TimeoutError:
             print(f"No products load at {url}. Skipping.")
             continue
+        
         items = page.query_selector_all("article.prd._fb")
         if not items:
             break

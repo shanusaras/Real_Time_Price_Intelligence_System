@@ -39,6 +39,13 @@ htmlcov/
 *.sql
 dump.sql
 
+# ETL outputs and large generated data
+etl/output/
+*.csv
+
+# Sensitive config
+etl/config.py
+
 # ETL outputs
 etl/output/
 

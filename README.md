@@ -4,12 +4,14 @@ A scalable, end-to-end simulation of a real-world **Price Intelligence System** 
 
 ---
 
-## 🚧 Project Status: Phase 1 Complete
+## 🚦 Project Status: Data Collection & ETL Complete
 
 - **✔ Scalable Jumia data scraping implemented**  
 - **✔ Robust data pipeline built**  
 - **✔ Business-driven categorization logic applied**  
-- ➡️ *Next: ETL & data cleaning, API endpoints, ML modeling, dashboard visualization*
+- **✔ ETL pipeline: JSON → MySQL (products & price_history)**
+- **✔ Data cleaning, deduplication, normalization complete**
+- ➡️ *Next: API endpoints, ML modeling, dashboard visualization*
 
 ---
 
@@ -52,11 +54,15 @@ We follow these ethical guidelines for all scraping activities:
 
 ```plaintext
 Real_Time_Price_Intelligence_System/
-├── data_collection/               # Scraper and raw data
-│   ├── data/                      # Raw JSON outputs
-│   │   ├── jumia_playwright.json
-│   │   └── sample_by_category.json
+├── data_collection/               # Scraper and raw/test data
+│   ├── data/                      # Main dataset (for ETL)
+│   │   └── jumia_playwright.json
+│   └── test_data/                 # Small sample/test data
+│       └── sample_by_category.json
 │   └── scrape_jumia_playwright.py # Playwright-based Jumia scraper
+├── etl/                           # ETL and data cleaning scripts
+│   ├── transform.py               # ETL: JSON → MySQL
+│   └── models.py                  # SQLAlchemy models
 ├── api/                           # FastAPI backend
 │   └── main.py
 ├── etl/                           # ETL and data cleaning scripts
@@ -77,25 +83,48 @@ Real_Time_Price_Intelligence_System/
 
 ---
 
+## 🧩 ETL Phase: JSON → MySQL
+
+**ETL pipeline loads all scraped product data into a MySQL database for analytics and downstream use.**
+
+### How it works
+- Reads Jumia product data from `data_collection/data/jumia_playwright.json`
+- Cleans, deduplicates, and normalizes product records
+- Loads products and price history into MySQL using SQLAlchemy models (`etl/models.py`)
+- Handles special characters, long text fields, and missing values robustly
+
+### How to run
+1. Ensure MySQL is running and database `price_intelligence_v2` is created
+2. Update `etl/config.py` with your MySQL credentials
+3. Create tables (if not already done):
+   ```bash
+   python etl/create_db_tables.py
+   ```
+4. Run ETL pipeline:
+   ```bash
+   python etl/transform.py
+   ```
+5. Data will be loaded into `products` and `price_history` tables
+
+---
+
 ## 🛠️ Tech Stack
 
-- **Python** (Playwright, Pandas, NumPy)  
-- **API** (FastAPI)  
-- **Data Processing** (Pandas)  
-- **Visualization** (Streamlit – upcoming)  
-- **ML Modeling** (scikit-learn – upcoming)  
+- **Python** (Playwright, Pandas, SQLAlchemy, PyMySQL)
+- **Database** (MySQL)
+- **API** (FastAPI – upcoming)
+- **Visualization** (Streamlit – upcoming)
+- **ML Modeling** (scikit-learn – upcoming)
 - **Containerization** (Docker)
 
 ---
 
 ## Next Steps
-- Scaffold `etl/` directory and add loader script
-- Define table schemas and transformation logic
-- Schedule ETL jobs (e.g., Airflow)
-- Exploratory Data Analysis (EDA) on pricing patterns
-- Real-time interactive dashboard with filters
+- Build API endpoints (FastAPI) for product & price queries
+- Exploratory Data Analysis (EDA) and price analytics
+- Real-time interactive dashboard with filters (Streamlit)
 - ML model to detect price anomalies + suggest optimal pricing
-- Full **ETL → ML → Deployment** pipeline
+- Full **ETL → API → ML → Dashboard → Deployment** pipeline
 
 ---
 
