@@ -5,7 +5,7 @@ from config import DB_CONFIG
 from urllib.parse import quote_plus
 
 import os
-print("DEBUG: MYSQL_PASSWORD from env =", os.environ.get("MYSQL_PASSWORD"))
+# print("DEBUG: MYSQL_PASSWORD from env =", os.environ.get("MYSQL_PASSWORD"))
 
 # Build the MySQL connection URL with URL-encoded password
 password = quote_plus(DB_CONFIG['password'])
