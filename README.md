@@ -155,7 +155,7 @@ Real_Time_Price_Intelligence_System/
 - Handles special characters, long text fields, and missing values robustly
 
 ### How to run
-1. Ensure MySQL is running and database `price_intelligence_v2` is created
+1. Ensure MySQL is running and database `price_intelligence` is created
 2. Update `etl/config.py` with your MySQL credentials
 3. Create tables (if not already done):
    ```bash
