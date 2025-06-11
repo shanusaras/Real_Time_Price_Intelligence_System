@@ -36,7 +36,8 @@ htmlcov/
 # Databases and SQL dumps
 *.db
 *.sqlite3
-*.sql
+# Only ignore SQL files in root, allow them in etl/sql/
+/*.sql
 dump.sql
 
 # ========================
