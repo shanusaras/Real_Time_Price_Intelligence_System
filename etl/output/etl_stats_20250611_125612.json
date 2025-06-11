@@ -1,0 +1,12 @@
+{
+  "start_time": "2025-06-11T12:56:12.516068",
+  "extracted": 18982,
+  "cleaned": 18982,
+  "valid": 18982,
+  "invalid": 0,
+  "loaded": 18982,
+  "errors": 0,
+  "end_time": "2025-06-11T12:56:59.120309",
+  "duration_seconds": 46.604241,
+  "status": "completed"
+}
