@@ -39,19 +39,183 @@ htmlcov/
 *.sql
 dump.sql
 
-# ETL outputs and large generated data
-etl/output/
-*.csv
+# ========================
+# ETL Directory
+# ========================
 
-# Sensitive config
+# Outputs - Only track specific report files
+etl/output/*
+!etl/output/README.md
+!etl/output/ETL_VALIDATION_REPORT.md
+!etl/output/etl_stats_*.json
+
+# Data - Ignore all except README
+etl/data/*
+!etl/data/README.md
+
+# Monitoring - Only track README
+etl/monitoring/*
+!etl/monitoring/README.md
+
+# Sensitive configs
 etl/config.py
+etl/config.py.backup
+etl/*.env
+etl/*.pem
+etl/*.key
 
-# ETL outputs
-etl/output/
+# Temporary and cache files
+etl/*.tmp
+etl/*.temp
+etl/*.swp
+etl/*.swo
+etl/.DS_Store
 
-## Raw scraped data (JSON)
+# ========================
+# Data Collection
+# ========================
+
+# Raw scraped data
 data_collection/raw_data/
-data_collection/data/debug_*.html
+data_collection/data/
+!data_collection/data/README.md
+
+# Debug and log files
+data_collection/*.log
+data_collection/logs/
+data_collection/debug_*.html
+
+# Environment and secrets
+data_collection/.env
+data_collection/*.pem
+data_collection/*.key
+
+# Temporary files
+data_collection/tmp/
+data_collection/temp/
+data_collection/*.tmp
+data_collection/*.temp
+
+# Browser automation
+data_collection/profile/
+data_collection/*.session
+
+# ========================
+# ML Directory
+# ========================
+ml/data/
+ml/models/
+ml/notebooks/.ipynb_checkpoints/
+ml/*.pkl
+ml/*.h5
+ml/*.joblib
+
+# ========================
+# API Directory
+# ========================
+api/.env
+api/instance/
+api/*.log
+
+# ========================
+# General
+# ========================
+# Credentials and secrets
+*.pem
+*.key
+*.crt
+*.cert
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+.venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and databases
+*.log
+logs/
+*.sqlite
+*.sqlite3
+*.db
+
+# Package and build files
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Archives and binaries
+*.tar
+*.gz
+*.zip
+*.7z
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Docker
+docker-compose.override.yml
+docker-compose.*.local.yml
+.docker/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# Local development settings
+local_settings.py
+db.sqlite3
+
+# Environment files (except example)
+!.env.example
 
 # Docker configs and local override
 docker-compose.override.yml
