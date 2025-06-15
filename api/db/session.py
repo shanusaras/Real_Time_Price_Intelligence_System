@@ -1,28 +1,33 @@
+"""
+Database session management for SQLAlchemy.
+
+This module provides session factories and utilities for database access.
+"""
+from typing import AsyncGenerator, Generator
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.pool import NullPool
 
-from .config import settings
-
-# Create SQLAlchemy engines
-SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL
-ASYNC_DATABASE_URL = settings.ASYNC_DATABASE_URL if hasattr(settings, 'ASYNC_DATABASE_URL') else None
+from ..config import settings
 
 # Synchronous engine for migrations and sync operations
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL,
+    settings.DATABASE_URL,
     pool_pre_ping=True,
-    pool_recycle=300  # Recycle connections after 5 minutes
+    pool_recycle=300,  # Recycle connections after 5 minutes
+    echo=settings.DEBUG,
 )
 
 # Asynchronous engine for async operations
 async_engine = create_async_engine(
-    ASYNC_DATABASE_URL or SQLALCHEMY_DATABASE_URL.replace('postgresql://', 'postgresql+asyncpg://'),
+    settings.ASYNC_DATABASE_URL or settings.DATABASE_URL.replace('sqlite://', 'sqlite+aiosqlite://'),
     echo=settings.DEBUG,
     pool_pre_ping=True,
     pool_recycle=300,
-    poolclass=NullPool if settings.TESTING else None
+    poolclass=NullPool if settings.TESTING else None,
+    future=True
 )
 
 # Session factories
@@ -37,21 +42,30 @@ AsyncSessionLocal = sessionmaker(
     async_engine,
     class_=AsyncSession,
     expire_on_commit=False,
-    autoflush=False
+    autoflush=False,
+    future=True
 )
 
-# Dependency
-def get_db():
-    """Synchronous database session dependency."""
+def get_db() -> Generator[Session, None, None]:
+    """
+    Dependency for getting a synchronous database session.
+    
+    Yields:
+        Session: A SQLAlchemy database session
+    """
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
 
-# Async database session dependency
-async def get_async_db():
-    """Asynchronous database session dependency."""
+async def get_async_db() -> AsyncGenerator[AsyncSession, None]:
+    """
+    Dependency for getting an asynchronous database session.
+    
+    Yields:
+        AsyncSession: An async SQLAlchemy database session
+    """
     async with AsyncSessionLocal() as session:
         try:
             yield session

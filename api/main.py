@@ -1,180 +1,146 @@
-# main.py
-from fastapi import FastAPI, HTTPException, Depends, status, Request
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from fastapi.encoders import jsonable_encoder
-from fastapi.exceptions import RequestValidationError
-from fastapi.staticfiles import StaticFiles
-from sqlalchemy.orm import Session
-from typing import List, Optional, Dict, Any
+"""
+Main FastAPI application module for the Price Intelligence System.
+
+This module initializes the FastAPI application, configures middleware,
+and includes all API routers.
+"""
 import logging
-import os
-import sys
-from pathlib import Path
-from datetime import datetime, timedelta
-from dotenv import load_dotenv
+from contextlib import asynccontextmanager
+from typing import Any, Dict
 
-# Load environment variables
-load_dotenv()
+from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.responses import JSONResponse
+from sqlalchemy import text
+from sqlalchemy.orm import Session
 
-# Add the project root to the Python path
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(project_root)
+from .config import settings
+from .db import get_db, check_database_connection
+from .routers import base, category, product, price
 
-# Import database and models
-from api.database import SessionLocal, get_db
-from etl.models import Product, PriceHistory
+# Configure logging
+logging.basicConfig(
+    level=settings.LOG_LEVEL,
+    format=settings.LOG_FORMAT
+)
+logger = logging.getLogger(__name__)
 
-# Initialize FastAPI app
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan context manager for FastAPI app."""
+    # Startup: Initialize database
+    try:
+        logger.info("Starting application...")
+        
+        # Check database connection
+        if not check_database_connection():
+            raise RuntimeError("Failed to connect to the database")
+            
+        logger.info("Application startup complete")
+    except Exception as e:
+        logger.error(f"Application startup failed: {e}")
+        raise
+    
+    yield
+    
+    # Shutdown: Clean up resources
+    logger.info("Shutting down application...")
+
+# Create FastAPI app with lifespan management
 app = FastAPI(
-    title="Real Time Price Intelligence System API",
-    description="API for accessing product pricing data and analytics",
+    title=settings.PROJECT_NAME,
+    description="API for Price Intelligence System",
     version="1.0.0",
-    docs_url="/api/docs",
-    redoc_url="/api/redoc",
-    openapi_url="/api/openapi.json"
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    docs_url=f"{settings.API_V1_STR}/docs",
+    redoc_url=f"{settings.API_V1_STR}/redoc",
+    lifespan=lifespan
 )
 
-# Configure CORS
+# Add middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(GZipMiddleware, minimum_size=1000)  # Compress responses > 1KB
 
-# Root endpoint
-@app.get("/")
-async def root():
-    return {
-        "message": "Welcome to the Real Time Price Intelligence System API",
-        "status": "operational",
-        "timestamp": datetime.utcnow().isoformat(),
-        "endpoints": [
-            {"path": "/api/v1/products", "methods": ["GET"], "description": "Get list of products with filters"},
-            {"path": "/api/v1/price-history/{product_id}", "methods": ["GET"], "description": "Get price history for a product"}
-        ]
-    }
+# Include API routers
+app.include_router(base.router, prefix=settings.API_V1_STR)
+app.include_router(
+    category.router, 
+    prefix=f"{settings.API_V1_STR}/categories", 
+    tags=["categories"]
+)
+app.include_router(
+    product.router, 
+    prefix=f"{settings.API_V1_STR}/products", 
+    tags=["products"]
+)
+app.include_router(
+    price.router, 
+    prefix=f"{settings.API_V1_STR}/prices", 
+    tags=["prices"]
+)
 
 # Health check endpoint
 @app.get("/health")
-async def health_check():
-    return {"status": "healthy", "timestamp": datetime.utcnow().isoformat()}
-
-# Helper function to get latest price for a product
-def get_latest_price(db: Session, product_id: int):
-    return db.query(PriceHistory)\
-        .filter(PriceHistory.product_id == product_id)\
-        .order_by(PriceHistory.scraped_at.desc())\
-        .first()
-
-# Products endpoint
-@app.get("/api/v1/products")
-def get_products(
-    category: Optional[str] = None,
-    brand: Optional[str] = None,
-    min_price: Optional[float] = None,
-    max_price: Optional[float] = None,
-    limit: int = 100,
-    offset: int = 0,
-    db: Session = Depends(get_db)
-):
+async def health_check(db: Session = Depends(get_db)) -> Dict[str, Any]:
     """
-    Get a list of products with optional filtering and pagination
+    Health check endpoint for monitoring.
+    
+    Returns:
+        Dict with status and database connection status
     """
     try:
-        # Start building the query
-        query = db.query(Product)
-        
-        # Apply filters
-        if category:
-            query = query.filter(Product.category.ilike(f"%{category}%"))
-        if brand:
-            query = query.filter(Product.brand.ilike(f"%{brand}%"))
-        
-        # Get total count before pagination
-        total = query.count()
-        
-        # Apply pagination
-        products = query.offset(offset).limit(limit).all()
-        
-        # Get latest prices for each product
-        results = []
-        for product in products:
-            latest_price = get_latest_price(db, product.product_id)
-            if latest_price:
-                results.append({
-                    "product_id": product.product_id,
-                    "name": product.name,
-                    "brand": product.brand,
-                    "category": product.category,
-                    "price": float(latest_price.price) if latest_price.price else None,
-                    "discount_pct": float(latest_price.discount_pct) if latest_price.discount_pct else None,
-                    "in_stock": latest_price.in_stock,
-                    "rating": latest_price.rating,
-                    "reviews": latest_price.reviews,
-                    "last_updated": latest_price.scraped_at.isoformat() if latest_price.scraped_at else None,
-                    "link": product.link
-                })
+        # Test database connection
+        db.execute(text("SELECT 1"))
+        db.commit()
         
         return {
-            "count": len(results),
-            "total": total,
-            "offset": offset,
-            "limit": limit,
-            "results": results
+            "status": "healthy",
+            "database": "connected",
+            "version": "1.0.0"
         }
-        
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Health check failed: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail={
+                "status": "unhealthy",
+                "database": "disconnected",
+                "error": str(e)
+            }
+        )
 
-# Price history endpoint
-@app.get("/api/v1/price-history/{product_id}")
-def get_price_history(
-    product_id: int,
-    days: int = 30,
-    db: Session = Depends(get_db)
-):
+# Root endpoint
+@app.get("/", response_model=Dict[str, str])
+async def root() -> Dict[str, str]:
     """
-    Get price history for a specific product
+    Root endpoint that provides API information.
+    
+    Returns:
+        Welcome message with API information
     """
-    try:
-        # Verify product exists
-        product = db.query(Product).filter(Product.product_id == product_id).first()
-        if not product:
-            raise HTTPException(status_code=404, detail="Product not found")
-        
-        # Calculate date range
-        end_date = datetime.utcnow()
-        start_date = end_date - timedelta(days=days)
-        
-        # Get price history
-        history = db.query(PriceHistory)\
-            .filter(
-                PriceHistory.product_id == product_id,
-                PriceHistory.scraped_at >= start_date
-            )\
-            .order_by(PriceHistory.scraped_at.asc())\
-            .all()
-        
-        return {
-            "product_id": product_id,
-            "product_name": product.name,
-            "history": [{
-                "price_id": h.price_id,
-                "price": float(h.price) if h.price else None,
-                "discount_pct": float(h.discount_pct) if h.discount_pct else None,
-                "in_stock": h.in_stock,
-                "rating": h.rating,
-                "reviews": h.reviews,
-                "scraped_at": h.scraped_at.isoformat() if h.scraped_at else None
-            } for h in history]
+    return {
+        "message": "Welcome to the Price Intelligence System API",
+        "version": "1.0.0",
+        "docs": f"{settings.API_V1_STR}/docs",
+        "redoc": f"{settings.API_V1_STR}/redoc"
+    }
+
+# Global exception handler
+@app.exception_handler(Exception)
+async def global_exception_handler(request, exc):
+    """Global exception handler for uncaught exceptions."""
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "detail": "Internal server error",
+            "error": str(exc)
         }
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    )

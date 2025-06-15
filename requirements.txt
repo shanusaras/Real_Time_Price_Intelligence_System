@@ -1,35 +1,67 @@
-# API and Web Framework
-fastapi==0.104.1
-uvicorn==0.24.0
-python-dotenv==1.0.0
-pydantic==2.4.2
-streamlit==1.28.1
+# Core
+python-dotenv>=1.0.0
+python-multipart>=0.0.6
 
-# Data Processing and Analysis
-pandas==2.0.3
-numpy==1.24.3
-scikit-learn==1.3.2
-prophet==1.1.4
-jupyter==1.0.0
+# Web Framework
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+pydantic>=2.4.2
+pydantic-settings>=2.0.3
 
 # Database
-PyMySQL==1.1.0
-sqlalchemy==2.0.23
+sqlalchemy[asyncio]>=2.0.0
+alembic>=1.12.1
+aiomysql>=0.1.1  # For async MySQL
+pymysql>=1.1.0  # For sync MySQL
 
-# API Clients
-requests==2.31.0
+# Data Processing
+pandas>=2.0.3
+numpy>=1.24.3
 
-# Visualization
-plotly==5.18.0
+# Security
+passlib[bcrypt]>=1.7.4
+python-jose[cryptography]>=3.3.0
+python-multipart>=0.0.6
+
+# Caching and Rate Limiting
+redis>=5.0.0
+slowapi>=0.1.8
+
+# Monitoring and Logging
+sentry-sdk[fastapi]>=1.35.0
+structlog>=23.1.0
+python-json-logger>=2.0.7
 
 # Testing
-pytest==7.4.3
+pytest>=7.4.3
+pytest-asyncio>=0.21.1
+httpx>=0.25.0
+pytest-cov>=4.1.0
 
 # Development
-black==23.10.1
-flake8==6.1.0
-pre-commit==3.5.0
-free-proxy>=1.1.1
+black>=23.10.1
+flake8>=6.1.0
+mypy>=1.7.0
+types-requests>=2.31.0.1
+pre-commit>=3.5.0
 
-# Headless browser for JS-rendered scraping
-playwright==1.35.0
+# Documentation
+mkdocs>=1.5.3
+mkdocs-material>=9.4.1
+
+# Scraping (for future use)
+playwright>=1.35.0
+beautifulsoup4>=4.12.2
+lxml>=4.9.3
+
+# Machine Learning (for future use)
+scikit-learn>=1.3.2
+prophet>=1.1.4
+
+# Visualization (for future use)
+plotly>=5.18.0
+matplotlib>=3.7.3
+
+# Email
+aiosmtplib>=2.0.0
+email-validator>=2.0.0
